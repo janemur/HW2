@@ -21,7 +21,9 @@ def option1(count, d):
                     else:
                         d[row[1]].append(row[2])
             count += 1
-        print(d)
+            
+        for key, value in d.items():
+            print("{0}: {1}".format(key, value))
 
 
 # Функция 2
@@ -55,7 +57,9 @@ def option2(count, workers_num, s):
         for v in s.values():
             del (v[3])
 
-    print(s)
+    for key, value in s.items():
+        print(f"{key} – Численность: {value[0]}; Макс зарплата: {value[1]}; Мин зарпалата: {value[2]}; "
+              f"Средняя зп: {value[3]}")
 
 
 # Функция 3
@@ -90,8 +94,9 @@ def option3(count, workers_num, k):
 
     with open('final.csv', 'w') as f:
         writer = csv.writer(f)
-        writer.writerow(k.keys())
-        writer.writerows(zip(*k.values()))
+        writer.writerow(['Департамент', 'Численность', 'Макс зарплата', 'Мин зарплата', 'Средняя зп'])
+        [f.write('{0},{1},{2},{3},{4}\n'.format(key, value[0], value[1], value[2], value[3])) for key, value in k.items()]
+    print ('csv файл сохранен')
 
 
 opt = input('Введите ваш выбор цифрой: ')
